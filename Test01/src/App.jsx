@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { comment } from "postcss";
+import { comment, Result } from "postcss";
 import React from "react";
 import { useState } from "react";
 
@@ -13,7 +13,7 @@ const App = () => {
 
   const Submithandler = (e) => {
     e.preventDefault();
-    console.log(e);
+
     let newdata = {
       id: nanoid(),
       name: name,
@@ -25,15 +25,20 @@ const App = () => {
     setdata([...data, newdata]);
   };
 
-  let avrage = data
-    .filter((e) => {
-      return e.service == "Customer Support";
-    })
-    .map((e) => {
-      let a = 0;
-      a += e.rating;
-      return a;
+  let avrage = (ser) => {
+    let filterdata = data.filter((e) => {
+      return e.service == ser;
     });
+    if (filterdata.length == 0) {
+      return 0;
+    } else {
+      let sum = parseInt(0);
+      filterdata.map((e) => (sum += parseInt(e.rating)));
+      let Result = sum / filterdata.length;
+      return Result.toFixed(2);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen bg-slate-500  flex content-center justify-center">
       <div className="container h-[50vh] w-[40%] bg-slate-200  ">
@@ -106,29 +111,10 @@ const App = () => {
         <ul>
           <li>Total Feedback Cout:{data.length}</li>
           <li>
-            Avrage ratting of Customer Support:{" "}
-            {
-              data.filter((e) => {
-                return e.service == "Customer Support";
-              }).length
-            }
+            Avrage ratting of Customer Support: {avrage("Customer Support")}
           </li>
-          <li>
-            Avrage ratting of Delivery{" "}
-            {
-              data.filter((e) => {
-                return e.service == "Delivery";
-              }).length
-            }{" "}
-          </li>
-          <li>
-            Avrage ratting of Product Quality{" "}
-            {
-              data.filter((e) => {
-                return e.service == "Product Quality";
-              }).length
-            }{" "}
-          </li>
+          <li>Avrage ratting of Delivery {avrage("Delivery")}</li>
+          <li>Avrage ratting of Product Quality {avrage("Product Quality")}</li>
           {data.map((e) => (
             <li key={e.id} className="text-white text-xs">
               name:{e.name} , service: {e.service}, email:{e.email}, rating:{" "}
