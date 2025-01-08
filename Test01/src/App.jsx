@@ -16,7 +16,7 @@ const App = () => {
 
     let newdata = {
       id: nanoid(),
-      name: name,
+      name: name, 
       email: email,
       rating: rating,
       comment: Comment,
@@ -26,9 +26,7 @@ const App = () => {
   };
 
   let avrage = (ser) => {
-    let filterdata = data.filter((e) => {
-      return e.service == ser;
-    });
+    let filterdata = data.filter((e) => e.service == ser);
     if (filterdata.length == 0) {
       return 0;
     } else {
@@ -109,12 +107,16 @@ const App = () => {
         </form>
 
         <ul>
-          <li>Total Feedback Cout:{data.length}</li>
-          <li>
+          <li className="text-white">Total Feedback Cout:{data.length}</li>
+          <li className="text-white">
             Avrage ratting of Customer Support: {avrage("Customer Support")}
           </li>
-          <li>Avrage ratting of Delivery {avrage("Delivery")}</li>
-          <li>Avrage ratting of Product Quality {avrage("Product Quality")}</li>
+          <li className="text-white">
+            Avrage ratting of Delivery {avrage("Delivery")}
+          </li>
+          <li className="text-white">
+            Avrage ratting of Product Quality {avrage("Product Quality")} 
+          </li>
           {data.map((e) => (
             <li key={e.id} className="text-white text-xs">
               name:{e.name} , service: {e.service}, email:{e.email}, rating:{" "}

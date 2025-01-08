@@ -18,7 +18,7 @@ const Addtask = (props) => {
   return (
     <form className="w-[25%] flex justify-between px-5 my-[2%]">
         <input
-          value={task}
+          value={task} 
           onChange={(e) => {
             settask(e.target.value);
           }}

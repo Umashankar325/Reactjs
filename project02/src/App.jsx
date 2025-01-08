@@ -29,7 +29,7 @@ const App = () => {
     };
     // console.log(data);
     console.log(e);
-    console.log(errors);
+    // console.log(errors);
 
     // const formhandler = (e) => {
     //   e.preventDefault();
@@ -117,7 +117,7 @@ const App = () => {
         <input
           type="Email"
           placeholder="Enter your Email"
-          {...register("Email", { required: "Email is requare " })}
+          {...register("Email", { required: "* Email is requare " })}
           className="m-2 p-2 rounded"
         />
         {errors.Email && <p className="text-red-500">{errors.Email.message}</p>}
